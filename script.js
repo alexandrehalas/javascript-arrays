@@ -74,3 +74,45 @@ const currencies = new Map([
 const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 /////////////////////////////////////////////////
+
+let arr = ['a', 'b', 'c', 'd', 'e'];
+
+// SLICE -> Returns a copy of a section of an array
+
+console.log(arr.slice(2));
+console.log(arr.slice(2, 4));
+console.log(arr.slice(-1));
+console.log(arr.slice(-2));
+console.log(arr.slice(1, -2));
+console.log(arr.slice());
+console.log([...arr]);
+
+// SPLICE -> Removes elements from an array and, if necessary, inserts new elements in their place, returning the deleted elements
+
+//https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/splice
+
+// console.log(arr);
+// console.log(arr.splice(2));
+
+console.log(arr);
+console.log(arr.splice(-1));
+
+console.log(arr);
+console.log(arr.splice(1, 2));
+
+console.log(arr);
+
+// REVERSE -> Reverses the elements in an array in place. This method mutates the array and returns a reference to the same array.
+arr = ['a', 'b', 'c', 'd', 'e'];
+const arr2 = ['j', 'i', 'h', 'g', 'f'];
+console.log(arr2.reverse());
+console.log(arr2);
+
+//CONCAT -> Combines two or more arrays. This method returns a new array without modifying any existing arrays.
+const letters = arr.concat(arr2);
+console.log(letters);
+console.log([...arr, ...arr2]);
+
+//JOIN
+
+console.log(letters.join(' - '));
