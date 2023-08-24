@@ -61,6 +61,36 @@ const inputLoanAmount = document.querySelector('.form__input--loan-amount');
 const inputCloseUsername = document.querySelector('.form__input--user');
 const inputClosePin = document.querySelector('.form__input--pin');
 
+const displayMovements = function (movements) {
+  containerMovements.innerHTML = '';
+
+  movements.forEach(function (movement, index) {
+    const movementType = movement > 0 ? 'deposit' : 'withdrawal';
+
+    const html = `
+      <div class="movements">
+        <div class="movements__row">
+          <div class="movements__type movements__type--${movementType}">${
+      index + 1
+    } ${movementType}</div>
+          <div class="movements__date">3 days ago</div>
+          <div class="movements__value">${movement}</div>
+        </div>
+      </div>`;
+
+    containerMovements.insertAdjacentHTML('afterbegin', html);
+  });
+};
+
+// const account1 = {
+//   owner: 'Jonas Schmedtmann',
+//   movements: [200, 450, -400, 3000, -650, -130, 70, 1300],
+//   interestRate: 1.2, // %
+//   pin: 1111,
+// };
+
+displayMovements(account1.movements);
+
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
@@ -163,7 +193,7 @@ movements.forEach(function (movement, index, array) {
 //0 : function(450, 2, [200, ..., 1300])
 //0 : function(-400, 3, [200, ..., 1300])
 */
-
+/*
 //FOREACH WITH MAPS AND SETS
 
 // Map
@@ -190,3 +220,4 @@ console.log(currenciesUnique);
 currenciesUnique.forEach(function (value, _, map) {
   console.log(`${value}`);
 });
+*/
