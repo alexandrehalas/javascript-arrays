@@ -71,7 +71,7 @@ const currencies = new Map([
   ['GBP', 'Pound sterling'],
 ]);
 
-const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+// const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 /////////////////////////////////////////////////
 /*
@@ -118,6 +118,7 @@ console.log([...arr, ...arr2]);
 console.log(letters.join(' - '));
 */
 
+/*
 // THE NEW AT METHOD
 
 const arr = [23, 11, 64];
@@ -133,3 +134,30 @@ console.log(arr.at(-1));
 // at method works with strings too
 
 console.log('halas'.at(-1));
+*/
+
+//LOOPING ARRAYS FOREACH
+
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+
+// for (const movement of movements) {
+for (const [index, movement] of movements.entries()) {
+  if (movement > 0) {
+    console.log(`Movement ${index + 1}: You deposited ${movement}`);
+  } else {
+    console.log(`Movement ${index + 1}: You withdrew ${Math.abs(movement)}`);
+  }
+}
+
+console.log('--- forEach ---');
+// in forEach break not works it will run in entirely array
+movements.forEach(function (movement, index, array) {
+  if (movement > 0) {
+    console.log(`Movement ${index + 1}: You deposited ${movement}`);
+  } else {
+    console.log(`Movement ${index + 1}: You withdrew ${Math.abs(movement)}`);
+  }
+});
+//0 : function(200, 1, [200, ..., 1300])
+//0 : function(450, 2, [200, ..., 1300])
+//0 : function(-400, 3, [200, ..., 1300])
