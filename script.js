@@ -91,6 +91,21 @@ const displayMovements = function (movements) {
 
 displayMovements(account1.movements);
 
+const createUsersNames = function (accounts) {
+  return accounts.forEach(
+    account =>
+      (account.userName = account.owner
+        .toLocaleLowerCase()
+        .split(' ')
+        .map(word => word[0])
+        .join(''))
+  );
+};
+
+const userName = createUsersNames(accounts);
+
+console.log(accounts);
+
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
@@ -266,6 +281,7 @@ const checkDogs = function (dogsJulia, dogsKate) {
 checkDogs(juliaDogsAge, kateDogsAge);
 */
 
+/*
 // THE MAP METHOD
 const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
@@ -291,3 +307,4 @@ const movementsDescriptions = movements.map(
     )}`
 );
 console.log(movementsDescriptions);
+*/
