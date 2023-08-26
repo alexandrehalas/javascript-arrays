@@ -63,8 +63,7 @@ const inputClosePin = document.querySelector('.form__input--pin');
 
 const displayUI = function (account) {
   labelWelcome.textContent = `Welcome back ${account.owner.split(' ')[0]}`;
-  containerApp.style.opacity = 100;
-
+  showUI();
   inputLoginUsername.value = inputLoginPin.value = '';
   inputLoginPin.blur();
 };
@@ -73,6 +72,14 @@ const updateUI = function (account) {
   displayMovements(account.movements);
   displayBalance(account);
   displaySummary(account.movements, currentAccount.interestRate);
+};
+
+const showUI = function () {
+  containerApp.style.opacity = 100;
+};
+
+const hideUI = function () {
+  containerApp.style.opacity = 0;
 };
 
 const displayMovements = function (movements) {
@@ -178,6 +185,23 @@ btnTransfer.addEventListener('click', function (event) {
   }
 
   inputTransferTo.value = inputTransferAmount.value = '';
+});
+
+btnClose.addEventListener('click', function (event) {
+  event.preventDefault();
+  if (
+    currentAccount.userName === inputCloseUsername.value &&
+    currentAccount.pin === Number(inputClosePin.value)
+  ) {
+    accounts.splice(
+      accounts.findIndex(
+        account => account.userName === inputCloseUsername.value
+      ),
+      1
+    );
+    hideUI();
+    inputCloseUsername.value = inputClosePin.value = '';
+  }
 });
 
 /////////////////////////////////////////////////
