@@ -61,6 +61,16 @@ const inputLoanAmount = document.querySelector('.form__input--loan-amount');
 const inputCloseUsername = document.querySelector('.form__input--user');
 const inputClosePin = document.querySelector('.form__input--pin');
 
+const displayUI = function (loggedAccount) {
+  labelWelcome.textContent = `Welcome back ${
+    loggedAccount.owner.split(' ')[0]
+  }`;
+  containerApp.style.opacity = 100;
+
+  inputLoginUsername.value = inputLoginPin.value = '';
+  inputLoginPin.blur();
+};
+
 const displayMovements = function (movements) {
   containerMovements.innerHTML = '';
 
@@ -103,27 +113,23 @@ const calculateSumaryIncomes = function (movements) {
     .reduce((accumulator, movement) => accumulator + movement, 0);
 };
 
-const calculateSumaryInterest = function (movements) {
+const calculateSumaryInterest = function (movements, interestRate) {
   return movements
     .filter(movement => movement > 0)
-    .map(deposit => (deposit * 1.2) / 100)
+    .map(deposit => (deposit * interestRate) / 100)
     .filter(interest => interest >= 1)
     .reduce((accumulator, movement) => accumulator + movement, 0);
 };
 
-const displaySummary = function (movements) {
+const displaySummary = function (movements, interestRate) {
   labelSumIn.textContent = `${calculateSumaryIncomes(movements) + '€'}`;
   labelSumOut.textContent = `${
     Math.abs(calculateSummaryOutcomes(movements)) + '€'
   }`;
-  labelSumInterest.textContent = `${calculateSumaryInterest(movements) + '€'}`;
+  labelSumInterest.textContent = `${
+    calculateSumaryInterest(movements, interestRate) + '€'
+  }`;
 };
-
-displayMovements(account1.movements);
-
-displayBalance(account1.movements);
-
-displaySummary(account1.movements);
 
 const createUsersNames = function (accounts) {
   return accounts.forEach(
@@ -137,6 +143,19 @@ const createUsersNames = function (accounts) {
 };
 
 const userName = createUsersNames(accounts);
+
+btnLogin.addEventListener('click', function (event) {
+  event.preventDefault();
+  const currentAccount = accounts.find(
+    account => account.userName === inputLoginUsername.value
+  );
+  if (currentAccount?.pin === Number(inputLoginPin.value)) {
+    displayUI(currentAccount);
+    displayMovements(currentAccount.movements);
+    displayBalance(currentAccount.movements);
+    displaySummary(currentAccount.movements, currentAccount.interestRate);
+  }
+});
 
 /////////////////////////////////////////////////
 // LECTURES
@@ -447,6 +466,7 @@ console.log(average1);
 console.log(average2);
 */
 
+/*
 // THE FIND METHOD -> Returns the value of the first element in the array where predicate is true, and undefined otherwise.
 
 const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
@@ -458,3 +478,4 @@ const jessicaAccount = accounts.find(
   account => account.owner === 'Jessica Davis'
 );
 console.log(jessicaAccount);
+*/
