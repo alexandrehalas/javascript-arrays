@@ -74,7 +74,7 @@ const displayMovements = function (movements) {
       index + 1
     } ${movementType}</div>
           <div class="movements__date">3 days ago</div>
-          <div class="movements__value">${movement}</div>
+          <div class="movements__value">${movement}€</div>
         </div>
       </div>`;
 
@@ -88,12 +88,42 @@ const calculateBalance = function (movements) {
 
 const displayBalance = function (movements) {
   const balance = calculateBalance(movements);
-  labelBalance.textContent = `${balance} EUR`;
+  labelBalance.textContent = `${balance} €`;
+};
+
+const calculateSummaryOutcomes = function (movements) {
+  return movements
+    .filter(movement => movement < 0)
+    .reduce((accumulator, movement) => accumulator + movement, 0);
+};
+
+const calculateSumaryIncomes = function (movements) {
+  return movements
+    .filter(movement => movement > 0)
+    .reduce((accumulator, movement) => accumulator + movement, 0);
+};
+
+const calculateSumaryInterest = function (movements) {
+  return movements
+    .filter(movement => movement > 0)
+    .map(deposit => (deposit * 1.2) / 100)
+    .filter(interest => interest >= 1)
+    .reduce((accumulator, movement) => accumulator + movement, 0);
+};
+
+const displaySummary = function (movements) {
+  labelSumIn.textContent = `${calculateSumaryIncomes(movements) + '€'}`;
+  labelSumOut.textContent = `${
+    Math.abs(calculateSummaryOutcomes(movements)) + '€'
+  }`;
+  labelSumInterest.textContent = `${calculateSumaryInterest(movements) + '€'}`;
 };
 
 displayMovements(account1.movements);
 
 displayBalance(account1.movements);
+
+displaySummary(account1.movements);
 
 const createUsersNames = function (accounts) {
   return accounts.forEach(
@@ -113,7 +143,7 @@ const userName = createUsersNames(accounts);
 
 // const currencies = new Map([
 //   ['USD', 'United States dollar'],
-//   ['EUR', 'Euro'],
+//   ['€', '€o'],
 //   ['GBP', 'Pound sterling'],
 // ]);
 
@@ -218,7 +248,7 @@ console.log('Map');
 
 const currencies = new Map([
   ['USD', 'United States dollar'],
-  ['EUR', 'Euro'],
+  ['€', '€o'],
   ['GBP', 'Pound sterling'],
 ]);
 
@@ -229,7 +259,7 @@ currencies.forEach(function (value, key, map) {
 // Set
 console.log('Set');
 
-const currenciesUnique = new Set(['USD', 'GBP', 'USD', 'EUR', 'EUR']);
+const currenciesUnique = new Set(['USD', 'GBP', 'USD', '€', '€']);
 
 console.log(currenciesUnique);
 
@@ -286,19 +316,19 @@ checkDogs(juliaDogsAge, kateDogsAge);
 // THE MAP METHOD
 const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
-const eurToUsd = 1.1;
+const €ToUsd = 1.1;
 
 // const movementsUSD = movements.map(function (mov) {
-//   return mov * eurToUsd;
+//   return mov * €ToUsd;
 // });
 
-const movementsUSD = movements.map(mov => mov * eurToUsd);
+const movementsUSD = movements.map(mov => mov * €ToUsd);
 
 console.log(movements);
 console.log(movementsUSD);
 
 const movementsUSDfor = [];
-for (const mov of movements) movementsUSDfor.push(mov * eurToUsd);
+for (const mov of movements) movementsUSDfor.push(mov * €ToUsd);
 console.log(movementsUSDfor);
 
 const movementsDescriptions = movements.map(
