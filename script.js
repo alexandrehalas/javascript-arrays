@@ -429,7 +429,7 @@ TEST DATA 2: [16, 6, 10, 5, 6, 1, 4]
 
 GOOD LUCK 😀
 */
-
+/*
 const calcAverageHumanAge = ages =>
   ages
     .map(dogAge => (dogAge <= 2 ? 2 * dogAge : 16 + dogAge * 4))
@@ -445,3 +445,16 @@ const average2 = calcAverageHumanAge([16, 6, 10, 5, 6, 1, 4]);
 
 console.log(average1);
 console.log(average2);
+*/
+
+// THE FIND METHOD -> Returns the value of the first element in the array where predicate is true, and undefined otherwise.
+
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+
+console.log(movements.find(movement => movement < 0));
+
+console.log(accounts);
+const jessicaAccount = accounts.find(
+  account => account.owner === 'Jessica Davis'
+);
+console.log(jessicaAccount);
